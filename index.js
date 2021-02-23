@@ -1,8 +1,23 @@
 const express = require('express')
+const morgan = require('morgan')
 
 const app = express()
 
 app.use(express.json())
+
+morgan.token('post-data', function (req, res) { return req.method === 'POST' ? JSON.stringify(req.body) : null })
+
+// app.use(morgan(':method :url :status :res[content-length] - :response-time ms :post-data'))
+app.use(morgan(function (tokens, req, res) {
+    return [
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens.status(req, res),
+        tokens.res(req, res, 'content-length'), '-',
+        tokens['response-time'](req, res), 'ms',
+        tokens['post-data'](req, res)
+    ].join(' ')
+}))
 
 let persons = [
     {
@@ -47,7 +62,7 @@ const generateId = () => {
 }
 
 app.post('/api/persons', (request, response) => {
-    const newPerson = request.body
+    const newPerson = { ...request.body }
     if (!newPerson.name || !newPerson.number) {
         return response.status(400).json({
             error: `${!newPerson.name && !newPerson.number ? 'name & number' : (!newPerson.name ? 'name' : 'number')} missing`
