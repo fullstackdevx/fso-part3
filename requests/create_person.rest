@@ -15,3 +15,56 @@ content-Type: application/json
     "name": "Juha",
     "number": "123123"
 }
+
+// ++++++++ Requests with error response ++++++++
+
+###
+
+POST http://localhost:3001/api/persons
+content-Type: application/json
+
+{
+}
+
+###
+
+POST http://localhost:3001/api/persons
+content-Type: application/json
+
+###
+
+POST http://localhost:3001/api/persons
+content-Type: application/json
+
+{
+    "name": "Juha",
+    "number": ""
+}
+
+###
+
+POST http://localhost:3001/api/persons
+content-Type: application/json
+
+{
+    "name": "Juha"
+}
+
+###
+
+POST http://localhost:3001/api/persons
+content-Type: application/json
+
+{
+    "name": "",
+    "number": "123123"
+}
+
+###
+
+POST http://localhost:3001/api/persons
+content-Type: application/json
+
+{
+    "number": "123123"
+}

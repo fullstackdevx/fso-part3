@@ -47,12 +47,21 @@ const generateId = () => {
 }
 
 app.post('/api/persons', (request, response) => {
-    const person = request.body
+    const newPerson = request.body
+    if (!newPerson.name || !newPerson.number) {
+        return response.status(400).json({
+            error: `${!newPerson.name && !newPerson.number ? 'name & number' : (!newPerson.name ? 'name' : 'number')} missing`
+        })
+    } else if (newPerson.name && persons.find(person => person.name === newPerson.name)) {
+        return response.status(409).json({
+            error: 'name must be unique'
+        })
+    }
 
-    person.id = generateId()
-    persons = persons.concat(person)
+    newPerson.id = generateId()
+    persons = persons.concat(newPerson)
 
-    response.json(person)
+    response.json(newPerson)
 })
 
 app.delete('/api/persons/:id', (request, response) => {
