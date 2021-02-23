@@ -68,3 +68,42 @@ content-Type: application/json
 {
     "number": "123123"
 }
+
+// Heroku
+
+###
+
+POST https://tranquil-escarpment-87631.herokuapp.com/api/persons
+content-Type: application/json
+
+{
+    "name": "lol-pallo",
+    "number": "1"
+}
+
+###
+
+POST https://tranquil-escarpment-87631.herokuapp.com/api/persons
+content-Type: application/json
+
+{
+}
+
+###
+
+POST https://tranquil-escarpment-87631.herokuapp.com/api/persons
+content-Type: application/json
+
+{
+    "name": "Juha",
+    "number": ""
+}
+
+###
+
+POST https://tranquil-escarpment-87631.herokuapp.com/api/persons
+content-Type: application/json
+
+{
+    "number": "123123"
+}

@@ -1,1 +1,7 @@
 DELETE http://localhost:3001/api/persons/2
+
+// Heroku
+
+###
+
+DELETE https://tranquil-escarpment-87631.herokuapp.com/api/persons/2
