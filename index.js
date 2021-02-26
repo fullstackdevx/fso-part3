@@ -27,7 +27,10 @@ app.use(morgan(function (tokens, req, res) {
 
 app.get('/info', (request, response) => {
     const date = new Date()
-    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`)
+    Person.find({}).then(persons => {
+        response.send(`<p>Phonebook has info for ${persons ? persons.length : 0} people</p><p>${date}</p>`)
+    })
+
 })
 
 app.get('/api/persons', (request, response, next) => {
