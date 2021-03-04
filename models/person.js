@@ -15,9 +15,18 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
   })
 
 const personSchema = new mongoose.Schema({
-  name: { type: String, unique: true },
-  number: String
+  name: { type: String, minlength: 3, unique: true },
+  number: {
+    type: String,
+    validate: {
+      validator: function (number) {
+        return [...number].reduce((acc, el) => /\d/.test(el) ? acc + 1 : acc, 0) >= 8
+      },
+      message: props => `${props.value} is not a valid phone number. Number must have at least 8 digits.`
+    }
+  }
 })
+
 personSchema.plugin(uniqueValidator);
 
 personSchema.set('toJSON', {
