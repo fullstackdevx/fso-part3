@@ -10,7 +10,9 @@
     "build:ui": "rm -rf build && cd ../phonebook && npm run build --prod && cp -r build ../backend/",
     "deploy": "git push heroku HEAD:master --force",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,11 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
     "nodemon": "^2.0.7"
   }
 }
